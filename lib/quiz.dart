@@ -5,7 +5,6 @@ import 'question.dart';
 class Quiz {
   int _quizNumber = 0;
   final List<Icon> _answerIcon = [];
-
   final List<Question> _questions = [
     Question('국악에서 자진모리, 중중모리, 휘모리 등의 빠르기말이 있는데 가장 빠른 것은 진양조이다?', false),
     Question('달팽이도 이빨이 있는가?', true),
@@ -19,18 +18,24 @@ class Quiz {
     Question('고기를 많이 먹으면 방귀냄새도 더 독하다.', true),
   ];
 
+  // 질문가져오기
   String getQuestion() {
     return _questions[_quizNumber].getQuestion();
   }
 
+  // 답변 가져오기
   bool getAnswer() {
     return _questions[_quizNumber].getAnswer();
   }
 
+  // 다음 질문
   void nextQuestion() {
+    print(_quizNumber);
+    print(_questions.length - 1);
     if (_quizNumber < _questions.length - 1) _quizNumber++;
   }
 
+  // 질문체크하기.
   void checkQuestion(bool selectAnswer) {
     if (_answerIcon.length == _questions.length) return;
 
@@ -51,6 +56,22 @@ class Quiz {
     }
   }
 
+  // 마지막 질문인지 체크하기
+  bool checkLastQuiz() {
+    bool result = false;
+    if (_quizNumber == _questions.length - 1) {
+      result = true;
+    }
+    return result;
+  }
+
+  // 답변 초기화
+  void clear() {
+    _quizNumber = 0;
+    _answerIcon.clear();
+  }
+
+  // 아이콘 가져오기
   List<Icon> getIcons() {
     return _answerIcon;
   }
